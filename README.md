@@ -44,7 +44,7 @@ A script for converting markdown files to HTML and PDF with custom styles.
 - `./my_custom_pandoc.sh alias`: Set up the mypand alias (set the alias name in your config file)
 - `./my_custom_pandoc.sh completion`: Add completion script to ~/.zshrc to enable tab completion for the open command
 - `./my_custom_pandoc.sh zshrc`: Set up the mypand alias and add completion script to ~/.zshrc in one command
-**Note:** The default alias name is `mypand`. You can change this in the config file.
+- **Note:** The default alias name is `mypand`. You can change this in the config file.
   - **You can run the script directly if you'd rather not set up the alias in that case, replace mypand with ./my_custom_pandoc.sh or /path/to/script/my_custom_pandoc.sh in the examples below.**
 - `mypand help`: Show a help message, similar to the readme but toned down a bit.
 
