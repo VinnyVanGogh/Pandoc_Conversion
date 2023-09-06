@@ -24,10 +24,10 @@ A script for converting markdown files to HTML and PDF with custom styles.
 ## Installation
 
 1. Clone this repository.
-2. Run `./my_custom_pandoc config` to set up the configuration file. 
-3. Modify the configuration file using `./my_custom_pandoc cfg`.
-4. Run `./my_custom_pandoc zshrc` to set up the alias and completion script.
-- You can also run `./my_custom_pandoc alias` and `./my_custom_pandoc completion` separately.
+2. Run `./my_custom_pandoc.sh config` to set up the configuration file. 
+3. Modify the configuration file using `./my_custom_pandoc.sh cfg`.
+4. Run `./my_custom_pandoc.sh zshrc` to set up the alias and completion script.
+- You can also run `./my_custom_pandoc.sh alias` and `./my_custom_pandoc.sh completion` separately.
   - **Note:** The default alias name is `mypand`. You can change this in the config file.
 
 ## Usage
@@ -36,16 +36,16 @@ A script for converting markdown files to HTML and PDF with custom styles.
 
 ### Commands
 
-- `mypand gh <file>...`: Convert markdown files to HTML using GitHub CSS
-- `mypand pdf <file>...`: Convert markdown files to PDF
-- `mypand open [dir]`: Open the HTML directory in Finder
-- `mypand show`: Display the current configuration settings
-- `mypand cfg`: Update the configuration settings
-- `./my_custom_pandoc alias`: Set up the mypand alias (set the alias name in your config file)
-- `./my_custom_pandoc completion`: Add completion script to ~/.zshrc to enable tab completion for the open command
-- `./my_custom_pandoc zshrc`: Set up the mypand alias and add completion script to ~/.zshrc in one command
+- `./my_custom_pandoc.sh gh <file>...`: Convert markdown files to HTML using GitHub CSS
+- `./my_custom_pandoc.sh pdf <file>...`: Convert markdown files to PDF
+- `./my_custom_pandoc.sh open [dir]`: Open the HTML directory in Finder
+- `./my_custom_pandoc.sh show`: Display the current configuration settings
+- `./my_custom_pandoc.sh cfg`: Update the configuration settings
+- `./my_custom_pandoc.sh alias`: Set up the mypand alias (set the alias name in your config file)
+- `./my_custom_pandoc.sh completion`: Add completion script to ~/.zshrc to enable tab completion for the open command
+- `./my_custom_pandoc.sh zshrc`: Set up the mypand alias and add completion script to ~/.zshrc in one command
 **Note:** The default alias name is `mypand`. You can change this in the config file.
-  - **You can run the script directly if you'd rather not set up the alias in that case, replace mypand with ./my_custom_pandoc in the examples and commands.**
+  - **You can run the script directly if you'd rather not set up the alias in that case, replace mypand with ./my_custom_pandoc.sh or /path/to/script/my_custom_pandoc.sh in the examples below.**
 - `mypand help`: Show a help message, similar to the readme but toned down a bit.
 
 ## Setup Help
