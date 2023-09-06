@@ -29,6 +29,8 @@ A script for converting markdown files to HTML and PDF with custom styles.
 4. Run `./my_custom_pandoc.sh zshrc` to set up the alias and completion script.
 - You can also run `./my_custom_pandoc.sh alias` and `./my_custom_pandoc.sh completion` separately.
   - **Note:** The default alias name is `mypand`. You can change this in the config file.
+5. If you are not setting an alias and plan to run this from outside the directory, make sure to chmod +x the script.
+  - **Note** if you do choose to set an alias, setting an alias will automatically chmod +x the script for you, so long as the SCRIPT_NAME variable is set in the config file, and you run it from the directory the script is in.
 
 ## Usage
 
