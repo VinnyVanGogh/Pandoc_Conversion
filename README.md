@@ -31,23 +31,28 @@ A script for converting markdown files to HTML and PDF with custom styles.
 ## Installation
 
 1. Clone this repository.
-2. Modify the configuration file `my_pandoc_config.sh` to customize settings.
-3. Run `./mypandoc zshrc` to set up the alias and completion script.
+2. Run `./my_custom_pandoc config` to set up the configuration file. 
+3. Modify the configuration file using `./my_custom_pandoc cfg`.
+4. Run `./my_custom_pandoc zshrc` to set up the alias and completion script.
+- You can also run `./my_custom_pandoc alias` and `./my_custom_pandoc completion` separately.
+  - **Note:** The default alias name is `mypand`. You can change this in the config file.
 
 ## Usage
 
-`mypandoc <command> [options]`
+`mypand <command> [options]`
 
-## Commands
+### Commands
 
-- **gh <file>...**: Convert markdown files to HTML using GitHub CSS
-- **pdf <file>...**: Convert markdown files to PDF
-- **open [dir]**: Open the HTML directory in Finder
-- **show**: Display the current configuration settings
-- **cfg**: Update the configuration settings
-- **alias**: Set up the mypand alias (set the alias name in your config file)
-- **completion**: Add completion script to ~/.zshrc to enable tab completion for the open command
-- **zshrc**: Set up the mypand alias and add completion script to ~/.zshrc in one command
+- `mypand gh <file>...`: Convert markdown files to HTML using GitHub CSS
+- `mypand pdf <file>...`: Convert markdown files to PDF
+- `mypand open [dir]`: Open the HTML directory in Finder
+- `mypand show`: Display the current configuration settings
+- `mypand cfg`: Update the configuration settings
+- `./my_custom_pandoc alias`: Set up the mypand alias (set the alias name in your config file)
+- `./my_custom_pandoc completion`: Add completion script to ~/.zshrc to enable tab completion for the open command
+- `./my_custom_pandoc zshrc`: Set up the mypand alias and add completion script to ~/.zshrc in one command
+**Note:** The default alias name is `mypand`. You can change this in the config file.
+  - **You can run the script directly if you'd rather not set up the alias in that case, replace mypand with ./my_custom_pandoc in the examples and commands.**
 
 ## Options
 

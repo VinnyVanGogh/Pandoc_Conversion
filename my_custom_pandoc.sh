@@ -7,13 +7,14 @@ FILE_URL="https://api.github.com/repos/OzakIOne/markdown-github-dark/contents/gi
 # Define the path for the custom GitHub CSS
 CUSTOM_GITHUB_CSS="${HOME}/Documents/configs/templates/github-darkmode-markdown.css"
 
-# Check if config file exists
-if [[ ! -f $CONFIG_FILE ]]; then
-  # Create directory if it doesn't exist
-  mkdir -p "$(dirname "$CONFIG_FILE")"
-  
-  # Create config file with default values
-  cat <<- 'EOL' > "$CONFIG_FILE"
+create_config_file() {
+  # Check if config file exists
+  if [[ ! -f $CONFIG_FILE ]]; then
+    # Create directory if it doesn't exist
+    mkdir -p "$(dirname "$CONFIG_FILE")"
+    
+    # Create config file with default values
+    cat <<- 'EOL' > "$CONFIG_FILE"
 #!/usr/bin/env bash
 # Script Name
 SCRIPT_NAME="my_custom_pandoc.sh"
@@ -48,7 +49,8 @@ NC='\033[0m' # Resets the text to default for the printf function
 # Alias Setup
 ALIAS_NAME="mypand" # Change this to your desired alias name
 EOL
-fi
+  fi
+}
 
 # Download and decode the file using curl and jq
 curl -s "$FILE_URL" \
@@ -395,6 +397,9 @@ case $command in
     ;;
   help)
     show_help
+    ;;
+  config)
+    create_config_file
     ;;
   alias)
     setup_mypand_alias
