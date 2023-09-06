@@ -13,13 +13,6 @@ A script for converting markdown files to HTML and PDF with custom styles.
   - [Options](#options)
   - [Setup Help](#setup-help)
 - [Examples](#examples)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [Acknowledgments](#acknowledgments)
-- [Screenshots](#screenshots)
-- [Changelog](#changelog)
-- [Compatibility](#compatibility)
-- [Security Considerations](#security-considerations)
 - [License](#license)
 
 ## Prerequisites
