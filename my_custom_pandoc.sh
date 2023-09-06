@@ -264,16 +264,16 @@ function show_help() {
 When running certain commands, make sure variables are set up properly in the config file:
 
 1. To use a custom CSS file, set the \`CUSTOM_GITHUB_CSS\` variable in the config file; otherwise, it will use the one downloaded from GitHub.
-1. To change the directories where files are saved, modify the \`HTML_DIRECTORY\` and \`PDF_DIRECTORY\` variables in the config file.
-1. When using the alias command, ensure your script's name matches the \`SCRIPT_NAME\` variable in the config file.
+2. To change the directories where files are saved, modify the \`HTML_DIRECTORY\` and \`PDF_DIRECTORY\` variables in the config file.
+3. When using the alias command, ensure your script's name matches the \`SCRIPT_NAME\` variable in the config file.
    - **To change the alias name, modify the \`ALIAS_NAME\` variable in the config file.**
    - **Run the script from the directory where it is saved when setting up the alias.**
-1. When using the completion command, make sure the \`ALIAS_NAME\` variable is set in the config file, and your .zshrc or another file you're sourcing.
+4. When using the completion command, make sure the \`ALIAS_NAME\` variable is set in the config file, and your .zshrc or another file you're sourcing.
   - **Autocompletion will be setup for the open command, everything else works best with default autocomplete.**
   - **You can run this from any directory**
-1. If you want to setup both the alias and completion in 1 go by using the zshrc command, make sure you have the \`ALIAS_NAME\` variable set in the config file.
+5. If you want to setup both the alias and completion in 1 go by using the zshrc command, make sure you have the \`ALIAS_NAME\` variable set in the config file.
   - **Run the script from the directory where it is saved when setting up the alias.**
-1. You can customize various other options like Default metadata and Pandoc arguments in the config file.
+6. You can customize various other options like Default metadata and Pandoc arguments in the config file.
 
 ## Examples
 
