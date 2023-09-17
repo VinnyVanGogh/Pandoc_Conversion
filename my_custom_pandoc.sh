@@ -49,6 +49,10 @@ NC='\033[0m' # Resets the text to default for the printf function
 # Alias Setup
 ALIAS_NAME="mypand" # Change this to your desired alias name
 EOL
+    chmod +x "$CONFIG_FILE"
+    echo "Config file created at: $CONFIG_FILE"
+  else
+    echo "Config file already exists at: $CONFIG_FILE"
   fi
 }
 
@@ -59,8 +63,8 @@ curl -s "$FILE_URL" \
 
 
 # Source the config file
-. "$CONFIG_FILE"
-
+# shellcheck disable=SC1090
+source "${CONFIG_FILE}"
 
 typeset -A metadata  # Declare metadata as a global associative array
 
@@ -91,10 +95,12 @@ function extract_metadata() {
   [ -z "${metadata[Language]}" ] && metadata[Language]="$DEFAULT_LANGUAGE"
 }
 
-# Create target directory if it does not exist
 function create_target_directory() {
-  target_dir="$(dirname "$target")"
-  [ ! -d "$target_dir" ] && mkdir -p "$target_dir"
+  html_target_dir="${HTML_DIRECTORY}/${last_folder}"
+  pdf_target_dir="${PDF_DIRECTORY}/${last_folder}"
+
+  [ ! -d "$html_target_dir" ] && mkdir -p "$html_target_dir"
+  [ ! -d "$pdf_target_dir" ] && mkdir -p "$pdf_target_dir"
 }
 
 function process_metadata() {
@@ -110,7 +116,6 @@ function process_metadata() {
 SED_SCRIPT
 }
 
-# Generate common metadata args for pandoc
 function generate_metadata_args() {
   metadata_args=(
     "--metadata" "date=${metadata[Date]}"
@@ -140,7 +145,6 @@ function convert_md_to_pdf() {
     -o "$target" -
 }
 
-# Shared function for common operations
 function prepare_conversion() {
   full_path=$(realpath "$1")
   dir_name=$(dirname "$full_path")
@@ -203,7 +207,6 @@ function open_html_directory() {
   fi
 }
 
-# Function to display the current configuration settings
 function display_config() {
   if [ -f "$CONFIG_FILE" ]; then
     echo "Current Configuration Settings:"
@@ -213,9 +216,7 @@ function display_config() {
   fi
 }
 
-# Function to update the configuration interactively
 function update_config() {
-  # Check if the config file exists
   if [ ! -f "$CONFIG_FILE" ]; then
     echo "Config file not found. Creating a new one."
     touch "$CONFIG_FILE"
@@ -235,72 +236,48 @@ function update_config() {
 }
 
 function show_help() {
-  # Create a temporary file for the help message
-  temp_file=$(mktemp)
-  
-  # Use a here document to generate the help message
-  cat << EOF > "$temp_file"
+  HELP_TEXT=$(cat << 'EOF'
 # mypandoc Help
-
 ## Usage
-
-\`mypandoc <command> [options]\`
-
+`mypandoc <command> [options]`
 ## Commands
-
-- **gh <file>...**: Convert markdown files to HTML using GitHub CSS
-- **pdf <file>...**: Convert markdown files to PDF
-- **open [dir]**: Open the HTML directory in Finder
-- **show**: Display the current configuration settings
-- **cfg**: Update the configuration settings
-- **alias**: Set up the mypand alias (set the alias name in your config file)
-- **completion**: Add completion script to ~/.zshrc to enable tab completion for open command
-- **zshrc**: Set up the mypand alias and add completion script to ~/.zshrc in one command
+- **gh <file>...**: Convert to HTML
+- **pdf <file>...**: Convert to PDF
+- **open [dir]**: Open HTML directory
+- **show**: Display settings
+- **cfg**: Update settings
+- **alias**: Set up alias
+- **completion**: Add to ~/.zshrc
+- **zshrc**: Set up alias and add to ~/.zshrc
 
 ## Options
-
-- **help**: Show this help message
+- **help**: Show help
 
 ## Setup Help
-
-When running certain commands, make sure variables are set up properly in the config file:
-
-1. To use a custom CSS file, set the \`CUSTOM_GITHUB_CSS\` variable in the config file; otherwise, it will use the one downloaded from GitHub.
-2. To change the directories where files are saved, modify the \`HTML_DIRECTORY\` and \`PDF_DIRECTORY\` variables in the config file.
-3. When using the alias command, ensure your script's name matches the \`SCRIPT_NAME\` variable in the config file.
-   - **To change the alias name, modify the \`ALIAS_NAME\` variable in the config file.**
-   - **Run the script from the directory where it is saved when setting up the alias.**
-4. When using the completion command, make sure the \`ALIAS_NAME\` variable is set in the config file, and your .zshrc or another file you're sourcing.
-  - **Autocompletion will be setup for the open command, everything else works best with default autocomplete.**
-  - **You can run this from any directory**
-5. If you want to setup both the alias and completion in 1 go by using the zshrc command, make sure you have the \`ALIAS_NAME\` variable set in the config file.
-  - **Run the script from the directory where it is saved when setting up the alias.**
-6. You can customize various other options like Default metadata and Pandoc arguments in the config file.
+1. Custom CSS: Set `CUSTOM_GITHUB_CSS`.
+2. Change directories: Modify `HTML_DIRECTORY` and `PDF_DIRECTORY`.
+3. Alias: Match `SCRIPT_NAME`, run from script directory.
+4. Completion: Set `ALIAS_NAME`, source .zshrc.
+5. Zshrc: Run from script directory, set `ALIAS_NAME`.
 
 ## Examples
-
-| Command                        | Description                                       |
-| ------------------------------ | ------------------------------------------------- |
-| \`mypand gh file.md\`            | Convert a single markdown file to HTML            |
-| \`mypand gh file1.md file2.md\`  | Convert multiple markdown files to HTML           |
-| \`mypand pdf file.md\`           | Convert a single markdown file to PDF             |
-| \`mypand pdf file1.md file2.md\` | Convert multiple markdown files to PDF            |
-| \`mypand open\`                  | Open the HTML directory in Finder                 |
-| \`mypand open 2021-01-01\`       | Open a specific HTML directory in Finder          |
-| \`mypand show\`                  | Display the current configuration settings        |
-| \`mypand cfg\`                   | Update the configuration settings                 |
-| \`mypand alias\`                 | Set up the mypand alias (requires config setup)   |
-| \`mypand help\`                  | Show this help message                            |
-| \`mypand completion\`            | Add completion script to ~/.zshrc                 |
-| \`mypand zshrc\`                 | Set up the mypand alias and add completion script |
+| Command | Description |
+| ------- | ----------- |
+| `mypand gh file.md` | Convert to HTML |
+| `mypand pdf file.md` | Convert to PDF |
+| `mypand open` | Open HTML directory |
+| `mypand cfg` | Edit config file |
+| `mypand show` | Display settings |
 EOF
+)
 
-  # Use bat to display the help message with syntax highlighting (Markdown language)
-  bat --theme="Dracula" --color=always --language=markdown "$temp_file"
-  
-  # Remove the temporary file
-  rm -f "$temp_file"
+  if command -v bat > /dev/null; then
+    echo "$HELP_TEXT" | bat --language=markdown --theme=TwoDark
+  else
+    echo "$HELP_TEXT"
+  fi
 }
+
 
 # Function to set up the mypand alias
 # If you changed the script name, please change this in the config file as well
