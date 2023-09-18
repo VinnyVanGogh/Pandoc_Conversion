@@ -48,10 +48,6 @@ case $command in
   completion)
     add_completion_to_zshrc
     ;;
-  zshrc)
-    setup_mypand_alias
-    add_completion_to_zshrc
-    ;;
   *)
     echo "Invalid command: $command"
     exit 1

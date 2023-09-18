@@ -7,6 +7,7 @@ TESTING2/
 zzz_old_versions/
 config.cfg
 .DS_Store
+my_pandoc.cfg
 
 # C extensions
 *.so
