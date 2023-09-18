@@ -88,7 +88,7 @@ function setup_mypand_alias() {
   chmod +x "$SCRIPT_NAME"
 
   # Create the alias in zshrc
-  echo "alias $ALIAS_NAME=\"$PWD/$SCRIPT_NAME\"" >> "${HOME}/.zshrc"
+  echo "alias ${ALIAS_NAME//\"}=\"$PWD/$SCRIPT_NAME\"" >> "${HOME}/.zshrc"
 
   # Reload the zshrc file to apply the alias immediately
   source "${HOME}/.zshrc"
@@ -132,4 +132,37 @@ function add_completion_to_zshrc() {
   echo "$completion_script" >> ~/.zshrc
 
   echo "Completion script added to ~/.zshrc for alias: $alias_name"
+}
+
+setup_environment() {
+  # Create the config file if it doesn't exist
+  create_config_file
+
+  # Variable to store user input
+  local user_input
+
+  # Alias setup
+  echo -n "Do you want to create an alias for the script? [y/n]: "
+  read -r user_input
+  if [[ $user_input =~ ^[yY](es)?$ ]]; then
+    echo -n "Enter alias name [Default: mypand]: "
+    read -r alias_name
+    alias_name=${alias_name:-mypand}
+    sed -i "s/^ALIAS_NAME=.*/ALIAS_NAME=\"$alias_name\"/" "$CONFIG_FILE"
+    setup_mypand_alias
+  fi
+
+  # Autocomplete setup for Zsh
+  echo -n "Do you want to setup autocomplete in Zsh? [y/n]: "
+  read -r user_input
+  if [[ $user_input =~ ^[yY](es)?$ ]]; then
+    add_completion_to_zshrc
+  fi
+
+  # Download CSS
+  echo -n "Do you want to download the custom CSS? [y/n]: "
+  read -r user_input
+  if [[ $user_input =~ ^[yY](es)?$ ]]; then
+    download_css
+  fi
 }

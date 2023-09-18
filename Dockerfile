@@ -14,10 +14,14 @@ COPY ./pandoc_conversion.sh ./
 RUN apt-get update && apt-get install -y \
     curl \
     jq \
-    pandoc
+    pandoc \
+    zsh
 
 # Give execute permissions to your scripts
 RUN chmod +x *.sh
+
+# Switch to zsh
+SHELL ["/usr/bin/zsh", "-c"]
 
 # Command to run your main script
 CMD ["./pandoc_conversion.sh"]

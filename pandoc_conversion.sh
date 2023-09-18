@@ -11,6 +11,9 @@ command="$1"
 shift
 
 case $command in
+  setup)
+    setup_environment
+    ;;
   gh)
     github_html "$@"
     joined_args=$(combine_args "$@")
