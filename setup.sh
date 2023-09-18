@@ -14,9 +14,10 @@ create_config_file() {
     
     # Create config file with default values
     cat <<- 'EOL' > "$CONFIG_FILE"
-#!/usr/bin/env bash
-# Script Name
-SCRIPT_NAME="my_custom_pandoc.sh"
+# This is your configuration file for the pandoc conversion script, anything that you want to change should be changed here.
+
+# Name of the main script
+SCRIPT_NAME="pandoc_conversion.sh"
 
 # Default Directories
 HTML_DIRECTORY="${HOME}/Documents/Html" # Change this to your desired directory to save HTML files
@@ -33,7 +34,7 @@ DEFAULT_DESCRIPTION="Add # Description: <description> to override this." # Chang
 DEFAULT_LANGUAGE="en-US" # Change this to your desired default language
 
 # Pandoc Arguments
-PANDOC_HTML_ARGS="--toc -s -f markdown -t html5 --css="$CUSTOM_GITHUB_CSS"" # Change this to your desired HTML arguments by default it uses github darkmode css
+PANDOC_HTML_ARGS="--toc -s -f markdown -t html5 --css='$CUSTOM_GITHUB_CSS'" # Change this to your desired HTML arguments by default it uses github darkmode css
 PANDOC_PDF_ARGS="--toc -s -f markdown -t pdf --pdf-engine=pdflatex" # Change this to your desired PDF arguments by default it uses pdflatex
 
 # Colors and Formatting
@@ -49,11 +50,10 @@ NC='\033[0m' # Resets the text to default for the printf function
 ALIAS_NAME="mypand" # Change this to your desired alias name
 
 # URL for downloading the custom CSS file
-FILE_URL="https://api.github.com/repos/OzakIOne/markdown-github-dark/contents/github-markdown.css"
-
+FILE_URL="https://api.github.com/repos/OzakIOne/markdown-github-dark/contents/github-markdown.css" # Change this to your desired URL by default it uses the github darkmode css
 
 # Define the path for the custom GitHub CSS
-CUSTOM_GITHUB_CSS="${HOME}/Documents/configs/templates/github-darkmode-markdown.css"
+CUSTOM_GITHUB_CSS="${HOME}/Documents/configs/templates/github-darkmode-markdown.css" # Change this to your desired path by default it saves to Documents/configs/templates as github-darkmode-markdown.css
 EOL
     chmod +x "$CONFIG_FILE"
     echo "Config file created at: $CONFIG_FILE"

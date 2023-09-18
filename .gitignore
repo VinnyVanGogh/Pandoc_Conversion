@@ -5,6 +5,7 @@ __pycache__/
 TESTING/
 TESTING2/
 old_versions/
+config.cfg
 
 # C extensions
 *.so
