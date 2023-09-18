@@ -60,6 +60,9 @@ EOL
 }
 
 download_css() {
+  # Create the directory if it doesn't exist
+  mkdir -p "$(dirname "$CUSTOM_GITHUB_CSS")"
+  # Download the custom CSS file from GitHub
   curl -s "$FILE_URL" \
   | jq -r '.content' \
   | base64 --decode > "$CUSTOM_GITHUB_CSS"
