@@ -66,6 +66,8 @@ download_css() {
   curl -s "$FILE_URL" \
   | jq -r '.content' \
   | base64 --decode > "$CUSTOM_GITHUB_CSS"
+
+  echo "Custom CSS file downloaded to: $CUSTOM_GITHUB_CSS"
 }
 
 # Function to set up the mypand alias
