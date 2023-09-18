@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy the scripts and config into the container
 COPY ./Configuration ./Configuration/
-COPY ./Functions ./Functions
+COPY ./Functions ./Functions/
 COPY ./Help_and_Setup ./Help_and_Setup/
 COPY ./pandoc_conversion.sh ./
 
