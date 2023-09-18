@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
 # Define the path to the config file
-export CONFIG_FILE="config.cfg"
-
-# Load the config file
-source ./config.cfg
+export CONFIG_FILE="./Configuration/my_pandoc.cfg"
 
 create_config_file() {
   # Check if config file exists

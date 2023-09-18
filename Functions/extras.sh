@@ -1,17 +1,30 @@
 #!/usr/bin/env bash
 
-function open_html_directory() {
-    if [ -z "$1" ]; then
-    select dir in $(ls -d "${HTML_DIRECTORY}"/*/ | xargs -n 1 basename); do
+function open_directory() {
+  local type="$1"  # 'pdf' or 'html'
+  local arg="$2"   # optional directory name
+  local target_directory=""
+
+  if [ "$type" == "pdf" ]; then
+    target_directory="$PDF_DIRECTORY"
+  elif [ "$type" == "html" ]; then
+    target_directory="$HTML_DIRECTORY"
+  else
+    echo "Invalid type. Use 'pdf' or 'html'."
+    return 1
+  fi
+
+  if [ -z "$arg" ]; then
+    select dir in $(ls -d "${target_directory}"/*/ | xargs -n 1 basename); do
       if [ -n "$dir" ]; then
-        open "${HTML_DIRECTORY}/${dir}"
+        open "${target_directory}/${dir}"
         exit 0
       else
         echo "Invalid selection"
       fi
     done
   else
-    open "${HTML_DIRECTORY}/$1"
+    open "${target_directory}/$arg"
     exit 0
   fi
 }

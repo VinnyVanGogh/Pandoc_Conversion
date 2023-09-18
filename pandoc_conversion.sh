@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-source ./help.sh
-source ./setup.sh
-source ./config.cfg
-source ./extras.sh
-source ./custom_metadata.sh
-source ./conversion.sh
+source ./Help_and_Setup/help.sh
+source ./Help_and_Setup/setup.sh
+source ./Functions/custom_metadata.sh
+source ./Functions/conversion.sh
+source ./Functions/extras.sh
+source ./Configuration/my_pandoc.cfg
 
 command="$1"
 shift
@@ -22,7 +22,7 @@ case $command in
     printf "${BOLD_ITALICS}Converted:${NC} ${CYAN}%s${NC} ${BOLD_ITALICS}to PDF and saved to:${NC} ${PURPLE}%s/%s${NC}\n" "$joined_args" "$PDF_DIRECTORY" "$last_folder"
     ;;
   open)
-    open_html_directory "$@"
+    open_directory "$@"
     ;;
   show)
     display_config
