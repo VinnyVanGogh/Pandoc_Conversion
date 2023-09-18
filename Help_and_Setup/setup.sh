@@ -79,7 +79,7 @@ function setup_mypand_alias() {
   fi
 
   # Read the alias name from the config file
-  local ALIAS_NAME
+  local ALIAS_NAME="$1"
   ALIAS_NAME=$(grep '^ALIAS_NAME=' "$CONFIG_FILE" | cut -d'=' -f2)
 
   # If ALIAS_NAME is not set in the config file, use a default value
@@ -151,8 +151,12 @@ setup_environment() {
     echo -n "Enter alias name [Default: mypand]: "
     read -r alias_name
     alias_name=${alias_name:-mypand}
-    sed -i "s/^ALIAS_NAME=.*/ALIAS_NAME=\"$alias_name\"/" "$CONFIG_FILE"
-    setup_mypand_alias
+    
+    # Update the config file
+    sed -i '' "s/^ALIAS_NAME=.*/ALIAS_NAME=\"$alias_name\"/" "$CONFIG_FILE"
+    
+    # Call the alias setup function with the new alias name
+    setup_mypand_alias "$alias_name"
   fi
 
   # Autocomplete setup for Zsh
