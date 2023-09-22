@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
-source ./Help_and_Setup/help.sh
-source ./Help_and_Setup/setup.sh
-source ./Functions/custom_metadata.sh
-source ./Functions/conversion.sh
-source ./Functions/extras.sh
-source ./Configuration/my_pandoc.cfg
+SCRIPT_DIR=$(dirname "$0")
+
+source "$SCRIPT_DIR/Help_and_Setup/help.sh"
+source "$SCRIPT_DIR/Help_and_Setup/setup.sh"
+source "$SCRIPT_DIR/Functions/custom_metadata.sh"
+source "$SCRIPT_DIR/Functions/conversion.sh"
+source "$SCRIPT_DIR/Functions/extras.sh"
+source "$SCRIPT_DIR/Configuration/my_pandoc.cfg"
+
 
 command="$1"
 shift
@@ -20,7 +23,7 @@ case $command in
     printf "${BOLD_ITALICS}Converted:${NC} ${CYAN}%s${NC} ${BOLD_ITALICS}to HTML and saved to:${NC} ${PURPLE}%s/%s${NC}\n" "$joined_args" "$HTML_DIRECTORY" "$last_folder"
     ;;
   pdf)
-    github_pdf "$@"
+    pdf "$@"
     joined_args=$(combine_args "$@")
     printf "${BOLD_ITALICS}Converted:${NC} ${CYAN}%s${NC} ${BOLD_ITALICS}to PDF and saved to:${NC} ${PURPLE}%s/%s${NC}\n" "$joined_args" "$PDF_DIRECTORY" "$last_folder"
     ;;
@@ -40,7 +43,7 @@ case $command in
     create_config_file
     ;;
   css)
-    download_css
+    download_github_css
     ;;
   alias)
     setup_mypand_alias

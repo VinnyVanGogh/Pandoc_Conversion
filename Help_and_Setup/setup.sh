@@ -59,7 +59,7 @@ EOL
   fi
 }
 
-download_css() {
+download_github_css() {
   # Create the directory if it doesn't exist
   mkdir -p "$(dirname "$CUSTOM_GITHUB_CSS")"
   # Download the custom CSS file from GitHub

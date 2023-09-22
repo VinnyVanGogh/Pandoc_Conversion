@@ -35,7 +35,7 @@ function github_html() {
   done
 }
 
-function github_pdf() {
+function pdf() {
   for arg in "$@"; do
     prepare_conversion "$arg"
     target="${PDF_DIRECTORY}/${last_folder}/${base_name##*/}.pdf"
